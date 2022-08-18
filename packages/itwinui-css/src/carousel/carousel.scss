@@ -53,9 +53,7 @@
   &-dots {
     @include iui-reset;
     @include iui-focus;
-    flex: 2;
     max-width: $iui-xxl * 4;
-    border-radius: $iui-border-radius;
     white-space: nowrap;
     @include hide-scrollbar;
   }
