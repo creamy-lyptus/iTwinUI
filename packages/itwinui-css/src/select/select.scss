@@ -61,7 +61,7 @@
   }
 
   @if $size == large {
-    --_iui-select-padding-block: var(--iui-size-xs);
+    --_iui-select-padding-block: var(--iui-size-3xs);
     --_iui-select-min-height: var(--iui-component-height-large);
     font-size: var(--iui-font-size-2);
   }
