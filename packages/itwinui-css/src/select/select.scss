@@ -4,6 +4,7 @@
 @import '../utils/index';
 @import '../tag/index';
 @import '../button/index';
+@import '../input/index';
 
 @mixin iui-select-button {
   @include iui-focus($offset: -2px, $thickness: 2px);
@@ -82,6 +83,11 @@
     @supports (gap: var(--iui-size-2xs)) {
       margin-left: 0;
     }
+  }
+
+  &-with-input {
+    max-width: calc(100% - 40px - 12px - 50px);
+    right: unset;
   }
 }
 

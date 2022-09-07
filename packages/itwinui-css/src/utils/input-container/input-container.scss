@@ -36,6 +36,7 @@
   .iui-input,
   .iui-input-with-icon,
   .iui-input-group {
+    position: relative;
     grid-area: inputs;
   }
 
