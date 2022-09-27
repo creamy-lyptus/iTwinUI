@@ -4,6 +4,7 @@
 
 @mixin iui-tabs {
   @include iui-reset;
+  display: flex;
   position: relative;
   list-style: none;
   user-select: none;
@@ -79,6 +80,12 @@
     padding-top: var(--iui-size-s);
     padding-bottom: var(--iui-size-s);
   }
+
+  .iui-tabs-inline-content {
+    display: flex;
+    gap: var(--iui-size-xs);
+    align-items: center;
+  }
 }
 
 @mixin iui-tab-label {
@@ -107,10 +114,16 @@
       height: var(--iui-size-3xs);
     }
   }
+
+  .iui-tabs-inline-content {
+    margin-left: auto;
+  }
 }
 
 @mixin iui-tabs-vertical {
   .iui-tabs {
+    flex-direction: column;
+
     li,
     .iui-tab {
       width: 100%;
@@ -131,6 +144,11 @@
     &.iui-active::after {
       width: var(--iui-size-3xs);
     }
+  }
+
+  .iui-tabs-inline-content {
+    flex-direction: column;
+    margin-top: auto;
   }
 }
 
