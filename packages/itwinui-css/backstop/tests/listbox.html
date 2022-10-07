@@ -1,0 +1,240 @@
+<!--
+  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+  See LICENSE.md in the project root for license terms and full copyright notice.
+-->
+<!DOCTYPE html>
+<html
+  lang="en-US"
+  id="theme"
+>
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <title>Listbox | iTwinUI</title>
+    <script type="module">
+      import "./assets/theme.js";
+      import "@itwin/itwinui-icons-elements/chevron-left";
+      import "@itwin/itwinui-icons-elements/chevron-right";
+      import "@itwin/itwinui-icons-elements/chevron-up";
+      import "@itwin/itwinui-icons-elements/chevron-down";
+    </script>
+    <style>
+      @import url("./assets/demo.css") layer(demo);
+      @import url('@itwin/itwinui-variables') layer(variables);
+      @import url("@itwin/itwinui-css/css/all.css") layer(itwinui);
+      section[id^='demo'] {
+        --_iui-listbox-menu-height: 200px;
+        width: auto;
+      }
+    </style>
+  </head>
+  <body class="iui-root">
+    <theme-button></theme-button>
+    <h1>Listbox</h1>
+    <hr />
+
+    <section id="demo-horizontal">
+
+      <div
+        class="iui-listbox-wrapper"
+        data-iui-orientation="horizontal"
+      >
+        <div class="iui-input-container iui-with-message">
+          <div class="iui-label">Options</div>
+          <ul
+            class="iui-menu"
+            role="listbox"
+          >
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 1</span>
+              </span>
+            </li>
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 2</span>
+              </span>
+            </li>
+            <li
+              class="iui-menu-item"
+              aria-disabled="true"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 3</span>
+              </span>
+            </li>
+          </ul>
+          <div class="iui-message">All available options.</div>
+        </div>
+
+        <div
+          class="iui-listbox-toolbar"
+          role="toolbar"
+          aria-label="Actions"
+        >
+          <button
+            class="iui-button"
+            data-iui-variant="borderless"
+          >
+            <svg-chevron-right
+              class="iui-button-icon"
+              aria-hidden="true"
+            ></svg-chevron-right>
+          </button>
+          <button
+            class="iui-button"
+            data-iui-variant="borderless"
+          >
+            <svg-chevron-left
+              class="iui-button-icon"
+              aria-hidden="true"
+            ></svg-chevron-left>
+          </button>
+        </div>
+
+        <div class="iui-input-container iui-with-message">
+          <div class="iui-label">Applied</div>
+          <ul
+            class="iui-menu"
+            role="listbox"
+          >
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 4</span>
+              </span>
+            </li>
+          </ul>
+          <div class="iui-message">Options that are applied.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <br /><br />
+
+    <section id="demo-vertical">
+
+      <div
+        class="iui-listbox-wrapper"
+        data-iui-orientation="vertical"
+      >
+        <div class="iui-input-container iui-with-message">
+          <div class="iui-label">Options</div>
+          <ul
+            class="iui-menu"
+            role="listbox"
+          >
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 1</span>
+              </span>
+            </li>
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 2</span>
+              </span>
+            </li>
+            <li
+              class="iui-menu-item"
+              aria-disabled="true"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 3</span>
+              </span>
+            </li>
+          </ul>
+          <div class="iui-message">All available options.</div>
+        </div>
+
+        <div
+          class="iui-listbox-toolbar"
+          role="toolbar"
+          aria-label="Actions"
+        >
+          <button
+            class="iui-button"
+            data-iui-variant="borderless"
+          >
+            <svg-chevron-down
+              class="iui-button-icon"
+              aria-hidden="true"
+            ></svg-chevron-down>
+          </button>
+          <button
+            class="iui-button"
+            data-iui-variant="borderless"
+          >
+            <svg-chevron-up
+              class="iui-button-icon"
+              aria-hidden="true"
+            ></svg-chevron-up>
+          </button>
+        </div>
+
+        <div class="iui-input-container iui-with-message">
+          <div class="iui-label">Applied</div>
+          <ul
+            class="iui-menu"
+            role="listbox"
+          >
+            <li
+              class="iui-menu-item"
+              role="menuitemcheckbox"
+              aria-checked="false"
+              tabindex="0"
+            >
+              <span class="iui-menu-item-text">
+                <span class="iui-menu-item-text-label">Option 4</span>
+              </span>
+            </li>
+          </ul>
+          <div class="iui-message">Options that are applied.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <script>
+      window.onload = () => {
+        // Clicking on menu-item should toggle selection
+        document.querySelectorAll('.iui-menu-item[role="menuitemcheckbox"]:not([aria-haspopup="menu"]):not([aria-disabled="true"]):not([aria-busy="true"])').forEach((item) => {
+          item.addEventListener('click', () => {
+            if (item.getAttribute('aria-checked', 'true')) {
+              item.removeAttribute('aria-checked');
+            } else {
+              item.setAttribute('aria-checked', 'true');
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

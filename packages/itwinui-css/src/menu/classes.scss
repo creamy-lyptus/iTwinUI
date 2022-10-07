@@ -4,12 +4,43 @@
 @import '../surface/index';
 
 .iui-menu {
-  @include iui-surface;
   @include iui-list-menu;
+
+  &:where([role='menu']) {
+    @include iui-list-menu-popover;
+
+    &:where([data-iui-scrollable='true']) {
+      @include iui-list-menu-scrollable;
+    }
+  }
+
+  &:where([role='listbox']) {
+    @include iui-list-menu-listbox;
+  }
 }
 
 .iui-menu-item {
   @include iui-menu-item;
+
+  &:where([data-iui-size='large']) {
+    @include iui-menu-item-size(large);
+  }
+}
+
+.iui-menu-item-icon {
+  @include iui-menu-item-icon;
+}
+
+.iui-menu-item-text {
+  @include iui-menu-item-text;
+}
+
+.iui-menu-item-text-label {
+  @include iui-menu-item-text-type(label);
+}
+
+.iui-menu-item-text-sublabel {
+  @include iui-menu-item-text-type(sublabel);
 }
 
 .iui-menu-content {

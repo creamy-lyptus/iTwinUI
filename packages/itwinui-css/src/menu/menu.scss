@@ -9,10 +9,6 @@ $iui-active-outline: thin solid var(--iui-color-foreground-primary);
   list-style-type: none;
   user-select: none;
   width: 100%;
-  margin: 0;
-  padding: 0;
-  max-height: var(--iui-menu-max-height);
-  border-radius: var(--iui-border-radius-1);
 
   .iui-header-menu-icon {
     margin: 0 var(--iui-size-2xs);
@@ -23,146 +19,168 @@ $iui-active-outline: thin solid var(--iui-color-foreground-primary);
     margin: 0;
     border-radius: var(--iui-border-radius-1);
   }
+}
 
-  &.iui-scroll {
-    overflow-y: auto;
-    overflow-y: overlay;
-    --iui-menu-max-height: 315px;
-  }
+@mixin iui-list-menu-popover {
+  @include iui-surface($border-radius: var(--iui-border-radius-1));
+}
+
+@mixin iui-list-menu-listbox {
+  @include iui-surface($border-radius: var(--iui-border-radius-1), $elevation: none);
+  border: 1px solid var(--iui-color-background-border);
+  height: var(--_iui-listbox-menu-height);
+  overflow-y: auto;
+  overflow-y: overlay;
+}
+
+@mixin iui-list-menu-scrollable {
+  --iui-menu-max-height: 315px;
+
+  max-height: var(--iui-menu-max-height);
+  overflow-y: auto;
+  overflow-y: overlay;
 }
 
 @mixin iui-menu-item {
+  --_iui-menu-item-text-color: var(--iui-color-foreground-2);
+  --_iui-menu-item-text-sublabel-opacity: var(--iui-opacity-3);
+
+  @include iui-menu-item-size;
   display: flex;
+  gap: var(--iui-size-xs);
   align-items: center;
   font-size: var(--iui-font-size-1);
   padding-block: var(--iui-size-2xs);
   padding-inline: calc(var(--iui-size-s) + 1px);
-  min-height: var(--iui-component-height);
+  min-height: var(--_iui-menu-item-min-height);
   cursor: pointer;
   line-height: normal;
-  color: var(--iui-color-foreground-2);
   border-radius: var(--iui-border-radius-1);
+  background-color: var(--_iui-menu-item-background-color);
+  color: var(--_iui-menu-item-text-color);
 
   + #{&} {
     margin-top: -1px;
   }
 
-  .iui-content,
-  .iui-menu-label,
-  .iui-menu-description {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  &:where(:hover) {
+    --_iui-menu-item-background-color: var(--iui-color-background-transparent-hover);
   }
 
-  .iui-content {
-    flex: 1 1 auto;
-
-    + .iui-icon {
-      margin-right: 0;
-      margin-left: var(--iui-size-xs);
-    }
-  }
-
-  .iui-menu-description {
-    display: none;
-    font-size: var(--iui-font-size-0);
-    opacity: var(--iui-opacity-3);
-  }
-
-  > .iui-icon {
-    @include iui-menu-icon;
-  }
-
-  &:hover {
-    background-color: var(--iui-color-background-transparent-hover);
-  }
-
-  &:focus,
-  &.iui-focused {
+  &:where(:focus, .iui-focused) {
     outline: $iui-active-outline;
     outline-offset: -1px;
   }
 
-  &:focus:not(:focus-visible) {
+  &:where(:focus:not(:focus-visible)) {
     outline: none;
   }
 
-  &.iui-large {
-    min-height: var(--iui-component-height-large);
-
-    .iui-menu-description {
-      display: block;
-    }
+  &:where([aria-haspopup='menu'], [aria-checked='true'])::after {
+    content: '';
+    display: flex;
+    flex-shrink: 0;
+    width: var(--iui-size-m);
+    height: var(--iui-size-m);
+    background-color: currentColor;
+    mask: var(--_iui-menu-item-end-svg) no-repeat center;
   }
 
-  &.iui-active {
-    &,
-    &:hover {
-      background-color: var(--iui-color-background-subtle-primary);
-      color: var(--iui-color-foreground-primary);
-      outline: $iui-active-outline;
-      outline-offset: -1px;
-    }
+  &:where([aria-haspopup='menu'])::after {
+    --_iui-menu-item-end-svg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='m6.00263 4.80681v6.39946a.27938.27938 0 0 0 .44292.24059l3.45479-3.17567a.34022.34022 0 0 0 .00046-.4807l-.00046-.00044-3.45479-3.22382a.269.269 0 0 0 -.44292.24058z' /></svg>");
+  }
 
-    .iui-menu-description {
-      opacity: 1;
-    }
+  &:where([aria-checked='true']) {
+    --_iui-menu-item-background-color: var(--iui-color-background-subtle-primary);
+    --_iui-menu-item-text-color: var(--iui-color-foreground-primary);
+    --_iui-menu-item-text-sublabel-opacity: var(--iui-opacity-1);
 
-    > .iui-icon {
-      fill: var(--iui-color-foreground-primary);
-    }
+    outline: $iui-active-outline;
+    outline-offset: -1px;
 
-    &:focus,
-    &.iui-focused {
+    &:where(:focus, .iui-focused) {
       outline-width: var(--iui-size-3xs);
       outline-offset: -2px;
     }
 
-    &:focus:not(:focus-visible) {
+    &:where(:focus:not(:focus-visible)) {
       outline: $iui-active-outline;
       outline-offset: -1px;
     }
-  }
 
-  &.iui-disabled {
-    &,
-    &:hover {
-      cursor: not-allowed;
-      outline: none;
-      background-color: var(--iui-color-background-1);
-      color: var(--iui-color-foreground-5);
-
-      > .iui-icon {
-        fill: var(--iui-color-foreground-5);
-      }
+    &::after {
+      --_iui-menu-item-end-svg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M6,14L0,8l2-2l4,4l8-8l2,2L6,14z' /></svg>");
     }
   }
 
-  &-skeleton {
-    --iui-menu-item-content-skeleton-max-width: 30%;
-    cursor: auto;
+  &:where([aria-busy='true']) {
+    --_iui-menu-item-text-max-width: 30%;
+    --_iui-menu-item-text-vertical-align: middle;
+    --_iui-menu-item-text-label-width: 100%;
+    --_iui-menu-item-text-label-height: var(--iui-font-size-1);
+    --_iui-menu-item-text-sublabel-width: 70%;
+    --_iui-menu-item-text-sublabel-height: var(--iui-font-size-0);
+    --_iui-menu-item-background-color: var(--iui-color-background-1);
+    --_iui-menu-item-text-gap: var(--iui-size-2xs);
 
-    .iui-content {
-      max-width: var(--iui-menu-item-content-skeleton-max-width);
-    }
+    cursor: progress;
+  }
 
-    .iui-menu-label {
-      width: 100%;
-      height: var(--iui-font-size-1);
-      vertical-align: middle;
-    }
+  &:where([aria-disabled='true']) {
+    --_iui-menu-item-background-color: var(--iui-color-background-1);
+    --_iui-menu-item-text-color: var(--iui-color-foreground-5);
 
-    .iui-menu-description {
-      width: 70%;
-      height: var(--iui-font-size-0);
-      vertical-align: middle;
-      margin-top: var(--iui-size-2xs);
-    }
+    cursor: not-allowed;
+    outline: none;
+  }
+}
 
-    &:hover {
-      background-color: unset;
-    }
+/// @arg $size Can be one of: default, large
+@mixin iui-menu-item-size($size: default) {
+  @if $size == 'default' {
+    --_iui-menu-item-min-height: var(--iui-component-height);
+    --_iui-menu-item-text-sublabel-display: none;
+  }
+  @if $size == 'large' {
+    --_iui-menu-item-min-height: var(--iui-component-height-large);
+    --_iui-menu-item-text-sublabel-display: block;
+  }
+}
+
+@mixin iui-menu-item-icon {
+  @include iui-icon-style('m');
+  fill: currentColor;
+}
+
+@mixin iui-menu-item-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  gap: var(--_iui-menu-item-text-gap);
+  max-width: var(--_iui-menu-item-text-max-width);
+}
+
+/// @arg $type Can be one of: label, sublabel
+@mixin iui-menu-item-text-type($type) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: var(--_iui-menu-item-text-vertical-align);
+
+  @if $type == 'label' {
+    width: var(--_iui-menu-item-text-label-width);
+    height: var(--_iui-menu-item-text-label-height);
+  }
+
+  @if $type == 'sublabel' {
+    display: var(--_iui-menu-item-text-sublabel-display);
+    font-size: var(--iui-font-size-0);
+    opacity: var(--_iui-menu-item-text-sublabel-opacity);
+    width: var(--_iui-menu-item-text-sublabel-width);
+    height: var(--_iui-menu-item-text-sublabel-height);
   }
 }
 
@@ -176,17 +194,7 @@ $iui-active-outline: thin solid var(--iui-color-foreground-primary);
 
 @mixin iui-menu-divider {
   height: 1px;
-  width: calc(100% - #{var(--iui-size-l)});
+  width: calc(100% - var(--iui-size-l));
   margin: 1px auto;
   background-color: var(--iui-color-background-border);
-}
-
-@mixin iui-menu-icon {
-  @include iui-icon-style('m');
-  flex: 0 0 auto;
-  fill: var(--iui-color-foreground-2);
-
-  + .iui-content {
-    margin-left: var(--iui-size-xs);
-  }
 }

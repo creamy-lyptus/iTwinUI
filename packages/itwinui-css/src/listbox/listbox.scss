@@ -1,0 +1,31 @@
+// Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+// See LICENSE.md in the project root for license terms and full copyright notice.
+
+@mixin iui-listbox-wrapper {
+  display: flex;
+  gap: var(--iui-size-xs);
+
+  > :where(:first-child, :last-child) {
+    flex: 1;
+  }
+
+  &:where([data-iui-orientation='horizontal']) {
+    --_iui-listbox-toolbar-direction: column;
+    --_iui-listbox-toolbar-padding-block: calc(var(--iui-size-l) + var(--iui-size-2xs));
+  }
+
+  &:where([data-iui-orientation='vertical']) {
+    --_iui-listbox-toolbar-direction: row;
+
+    flex-direction: column;
+  }
+}
+
+@mixin iui-listbox-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: var(--_iui-listbox-toolbar-direction);
+  justify-content: center;
+  gap: var(--iui-size-2xs);
+  padding-block: var(--_iui-listbox-toolbar-padding-block);
+}
