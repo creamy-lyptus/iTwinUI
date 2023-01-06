@@ -4,4 +4,8 @@
 
 .iui-badge {
   @include iui-badge;
+
+  @each $variant in skyblue, celery, froly, steelblue, sunglow, seabuckthorn, montecarlo, poloblue, bouquet, ash, oak, informational, positive, warning, negative {
+    @include iui-badge-variant($variant);
+  }
 }
